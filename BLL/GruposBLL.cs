@@ -11,37 +11,43 @@ namespace BLL
     {
         public static bool Insertar(Grupos nuevo)
         {
-            bool retorno = false;
-            using (var Conexion = new DetallesDb())
+            bool retorno = false;   
+
+            try
             {
-                try
+                var db = new DetallesDb();
+
+                db.Grupo.Add(nuevo);
+                foreach (var estudiante in nuevo.Estudiante)
                 {
-                    Conexion.Grupo.Add(nuevo);
-                    Conexion.SaveChanges();
-                    retorno = true;
+                    db.Entry(nuevo).State = System.Data.Entity.EntityState.Unchanged;
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
-                return retorno;
+                db.SaveChanges();
+
+                retorno = true;
             }
+            catch (Exception)
+            {
+                throw;
+            }
+            return retorno;
         }
 
-        public static Grupos Buscar(int GrupoId)
+        public static Grupos Buscar(int grupoId)
         {
-            var Grupo = new Grupos();
+            Grupos grupo;
             using (var Conexion = new DetallesDb())
             {
                 try
                 {
-                    Grupo = Conexion.Grupo.Find(GrupoId);
+                    grupo = Conexion.Grupo.Find(grupoId);
+                    grupo.Estudiante.Count();
                 }
                 catch (Exception)
                 {
                     throw;
                 }
-                return Grupo;
+                return grupo;
             }
         }
 

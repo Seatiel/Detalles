@@ -13,36 +13,35 @@ namespace BLL
         public static bool Insertar(Estudiantes nuevo)
         {
             bool retorno = false;
-            using (var Conexion = new DetallesDb())
+            try
             {
-                try
-                {
-                    Conexion.Estudiante.Add(nuevo);
-                    Conexion.SaveChanges();
-                    retorno = true;
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-                return retorno;
+                var db = new DetallesDb();
+                db.Estudiante.Add(nuevo);
+                db.SaveChanges();
+                retorno = true;
             }
+            catch (Exception)
+            {
+                throw;
+            }
+            return retorno;
         }
 
         public static Estudiantes Buscar(int id)
         {
-            var Estudiante = new Estudiantes();
+            var estudiante = new Estudiantes();
             using (var Conexion = new DetallesDb())
             {
                 try
                 {
-                    Estudiante = Conexion.Estudiante.Find(id);
+                    estudiante = Conexion.Estudiante.Find(id);
+                    estudiante.Grupo.Count();
                 }
                 catch (Exception)
                 {
                     throw;
                 }
-                return Estudiante;
+                return estudiante;
             }
         }
 

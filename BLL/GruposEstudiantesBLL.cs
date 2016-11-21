@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace BLL
 {
@@ -23,9 +24,10 @@ namespace BLL
                     Conexion.SaveChanges();
                     retorno = true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    throw;
+                    MessageBox.Show(e.ToString());
+                    //throw;
                 }
                 return retorno;
             }
@@ -40,9 +42,10 @@ namespace BLL
                 {
                     Lista = Conexion.GruposEstudiantes.Where(ge => ge.GrupoId == grupoId).ToList();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    throw;
+                    MessageBox.Show(e.ToString());
+                    //throw;
                 }
                 return Lista;
             }

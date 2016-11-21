@@ -44,9 +44,13 @@ namespace TareaDetalles.UI.Registros
             GruposdataGridView.DataSource = null;
             int GrupoId;
             int.TryParse(GrupoIdtextBox.Text, out GrupoId);
-            GrupoEstuduante.Add((new GruposEstudiantes() { EstudianteId = (int)NombreGrupocomboBox.SelectedValue, GrupoId = GrupoId }));
+            grupo.Estudiante.Add(new Estudiantes((int)NombreGrupocomboBox.SelectedValue, NombreGrupocomboBox.Text));
+            GruposdataGridView.DataSource = null;
+            GruposdataGridView.DataSource = grupo.Estudiante;
+
+            /*GrupoEstuduante.Add((new GruposEstudiantes() { EstudianteId = (int)NombreGrupocomboBox.SelectedValue, GrupoId = GrupoId }));
             Estudiante.Add(EstudiantesBLL.Buscar((int)NombreGrupocomboBox.SelectedValue));
-            GruposdataGridView.DataSource = Estudiante;
+            GruposdataGridView.DataSource = Estudiante;*/
         }
 
         private void Buscarbutton_Click(object sender, EventArgs e)
@@ -71,6 +75,11 @@ namespace TareaDetalles.UI.Registros
             int.TryParse(GrupoIdtextBox.Text, out Id);
             GruposEstudiantesBLL.Insertar(GrupoEstuduante);
             GruposBLL.Insertar(new Grupos(Id, NombreGrupotextBox.Text));
+
+            if (GruposEstudiantesBLL.Insertar(GrupoEstuduante))
+            {
+                MessageBox.Show("Guardado");
+            }
         }
 
         private bool Validar()

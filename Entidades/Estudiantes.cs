@@ -8,29 +8,22 @@ namespace Entidades
 {
     public class Estudiantes
     {
-        private int selectedValue;
-
         [Key]
         public int EstudianteId { get; set; }
         public string Nombres { get; set; }
 
-        //public virtual ICollection<Grupos> Grupos { get; set; }
+        public List<Grupos> Grupo { get; set; }        
 
-        public Estudiantes(int estudianteId, string nombres)
+        public Estudiantes(int estudianteID, string nombre)
         {
-            this.EstudianteId = estudianteId;
-            this.Nombres = nombres;
-            //this.Grupos = new HashSet<Grupos>();
+            this.EstudianteId = estudianteID;
+            this.Nombres = nombre;
+            this.Grupo = new List<Grupos>();
         }
 
         public Estudiantes()
         {
-            //this.Grupos = new HashSet<Grupos>();
-        }
-
-        public Estudiantes(int selectedValue)
-        {
-            this.selectedValue = selectedValue;
+            this.Grupo = new List<Grupos>();
         }
     }
 }

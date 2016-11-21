@@ -10,7 +10,7 @@ namespace Entidades
     {
         [Key]
         public int Id { get; set; }
-        public int EstudianteId { get; set; }
         public int GrupoId { get; set; }
+        public int EstudianteId { get; set; }        
     }
 }
