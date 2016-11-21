@@ -35,7 +35,7 @@ namespace BLL
 
         public static Grupos Buscar(int grupoId)
         {
-            Grupos grupo;
+            var grupo = new Grupos();
             using (var Conexion = new DetallesDb())
             {
                 try
